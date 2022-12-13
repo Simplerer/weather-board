@@ -4,8 +4,23 @@ var button = document.getElementById("button");
 
 
 var getWeather = function (lat, lon) {
+    
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=226011e8e963e4a2251a03649b5adc44&units=imperial';
 
+    console.log(requestUrl);
 
+    fetch(requestUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data) 
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+
+    
 
 }
 
@@ -23,8 +38,8 @@ var gatherCoords = function(event) {
       .then(function (data) {
           console.log(data);
           for (var i = 0; i < data.length; i++){
-              console.log(data[i].state);
-              getWeather()
+            
+              getWeather(data[i].lat, data[i].lon);
 
             }
 
@@ -44,5 +59,3 @@ button.addEventListener('click', gatherCoords);
 // ------------------------------------------this is for weather -----------------------------------
 
 // https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-
-// var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=226011e8e963e4a2251a03649b5adc44'
