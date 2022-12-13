@@ -20,7 +20,7 @@ var getWeather = function (lat, lon) {
         console.log(error);
     })
 
-    
+// Need to extract icon, date, city name, temp, humidity, and wind speed
 
 }
 
@@ -51,11 +51,8 @@ var gatherCoords = function(event) {
 
 button.addEventListener('click', gatherCoords);
 
-// API key = 226011e8e963e4a2251a03649b5adc44
-// ---------------------------------------------this is for getting lat and lon-------------------
-// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-
-
-// ------------------------------------------this is for weather -----------------------------------
-
-// https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+// to maybe get weather icon
+//----------- var icon = weather[0].icon      ------    someone had a.weather[0].icon?
+//=---------iconurl = 'http://openweathermap.org/img/wn/10d.png  ..?    10d is code
+//  ---------------so 'http://openweathermap.org/img/wn/ + icon + .png'
+ //          createAttribute src as the link
