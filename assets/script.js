@@ -1,29 +1,79 @@
 var searchInput = document.querySelector("#city");
 var button = document.getElementById("button");
+var currentDay = document.getElementById("currentday")
 
 
+var weatherToday = function (city, date, icon, temp, wind, humidity) {
 
+    console.log(city);
+    console.log(date);
+    console.log(icon);
+    console.log(temp);
+    console.log(wind);
+    console.log(humidity);
+    
+    // <div class="col-12 p-5 m-4" id="current-city">
+    //         <h1>CIty NAme and date</h1>
+    //         <h2>Temp</h1>
+    //           <h2>Wind</h1>
+    //             <h2>Humidity</h1>
+    //       </div>
+    //   container for city info
+    var currCityBox = document.createElement('div');
+    currCityBox.className = 'col-12 p-5 m-4';
+    //   title of card
+    var currCity = document.createElement('h1');
+    currCity.textContent = city + date
+    //    icon
+    var currIcon = document.createElement('img');
+    currIcon.setAttribute('src', 'http://openweathermap.org/img/wn/' + icon + '.png');
+    //   temp
+    var currTemp = document.createElement('h2');
+    currTemp.textContent = 'Temp: ' + temp + '°F';
+
+    var currWind = document.createElement('h2');
+    currWind.textContent = 'Wind: ' + wind + ' MPH';
+
+    var currHumidity = document.createElement('h2');
+    currHumidity.textContent = 'Humidity: ' + humidity + ' %';
+    
+
+
+}
 var getWeather = function (lat, lon) {
     
     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=226011e8e963e4a2251a03649b5adc44&units=imperial';
-
-    console.log(requestUrl);
-
+    
     fetch(requestUrl)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
-        console.log(data) 
+        weatherToday(data.name, data.dt, data.weather[0].icon, data.main.temp, data.wind.speed, data.main.humidity);
     })
     .catch(function (error) {
         console.log(error);
-
-    })
-
-// Need to extract icon, date, city name, temp, humidity, and wind speed
-
+        
+    })  
+        
 }
+
+// var getForecast = function(lat, lon) {
+
+// var forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=226011e8e963e4a2251a03649b5adc44&units=imperial';
+
+// fetch(forecastURL)
+// .then(function (response) {
+//     return response.json();
+// })
+// .then(function (data) {
+//     console.log(data);
+// })
+// .catch(function (error) {
+//     console.log(error);
+    
+// })
+// }
 
 var gatherCoords = function(event) {
     event.preventDefault();
@@ -38,9 +88,8 @@ var gatherCoords = function(event) {
         return response.json();
       })
       .then(function (data) {
-          console.log(data);
           getWeather(data[0].lat, data[0].lon)
-
+        //   getForecast(data[0].lat, data[0].lon)
         })
     .catch(function (error) {
         console.log(error);
