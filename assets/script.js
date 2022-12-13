@@ -18,6 +18,7 @@ var getWeather = function (lat, lon) {
     })
     .catch(function (error) {
         console.log(error);
+
     })
 
 // Need to extract icon, date, city name, temp, humidity, and wind speed
@@ -28,6 +29,7 @@ var gatherCoords = function(event) {
     event.preventDefault();
     
     var cityName = searchInput.value.trim();
+    localStorage.setItem('cityname', cityName);
 
     var getCoordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
 
@@ -37,11 +39,7 @@ var gatherCoords = function(event) {
       })
       .then(function (data) {
           console.log(data);
-          for (var i = 0; i < data.length; i++){
-            
-              getWeather(data[i].lat, data[i].lon);
-
-            }
+          getWeather(data[0].lat, data[0].lon)
 
         })
     .catch(function (error) {
