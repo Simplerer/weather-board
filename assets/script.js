@@ -61,18 +61,33 @@ var getForecast = function(lat, lon) {
         return response.json();
     })
     .then(function (data) {
-        console.log(data);
+        
+        forecast.textContent = '';
+
         for (var i = 0; i < 40; i += 8) {
-            console.log(data.list[i].dt)
-//     -------------- date, icon, temp, wind, humidity
+
+            var trueDate = new Date(data.list[i].dt * 1000);
+
             var futureDays = document.createElement('div');
-            futureDays.className = 'col-12 p-5';
+            futureDays.className = 'col';
 
-            var futureDate = document.createElement('h')
+            var futureDate = document.createElement('h2');
+            futureDate.textContent = trueDate.toLocaleDateString("en-US");
 
+            var futureIcon = document.createElement('img');
+            futureIcon.setAttribute('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '.png');
 
+            var futureTemp = document.createElement('h2');
+            futureTemp.textContent = 'Temp: ' + data.list[i].main.temp + '°F';
 
+            var futureWind = document.createElement('h2');
+            futureWind.textContent = 'Wind: ' + data.list[i].wind.speed + ' MPH';
 
+            var futureHumidity = document.createElement('h2');
+            futureHumidity.textContent = 'Humidity: ' + data.list[i].main.humidity + ' %'
+
+            forecast.appendChild(futureDays);
+            futureDays.append(futureDate, futureIcon, futureTemp, futureWind, futureHumidity);
 
 
         }
