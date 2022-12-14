@@ -5,40 +5,31 @@ var currentDay = document.getElementById("currentday")
 
 var weatherToday = function (city, date, icon, temp, wind, humidity) {
 
-    console.log(city);
-    console.log(date);
-    console.log(icon);
-    console.log(temp);
-    console.log(wind);
-    console.log(humidity);
+    var trueDate = new Date(date * 1000);
     
-    // <div class="col-12 p-5 m-4" id="current-city">
-    //         <h1>CIty NAme and date</h1>
-    //         <h2>Temp</h1>
-    //           <h2>Wind</h1>
-    //             <h2>Humidity</h1>
-    //       </div>
     //   container for city info
     var currCityBox = document.createElement('div');
     currCityBox.className = 'col-12 p-5 m-4';
     //   title of card
     var currCity = document.createElement('h1');
-    currCity.textContent = city + date
+    currCity.textContent = city + ' ' + trueDate.toLocaleDateString("en-US");
     //    icon
     var currIcon = document.createElement('img');
-    currIcon.setAttribute('src', 'http://openweathermap.org/img/wn/' + icon + '.png');
+    currIcon.setAttribute('src', 'https://openweathermap.org/img/wn/' + icon + '.png');
     //   temp
     var currTemp = document.createElement('h2');
     currTemp.textContent = 'Temp: ' + temp + '°F';
-
+    
     var currWind = document.createElement('h2');
     currWind.textContent = 'Wind: ' + wind + ' MPH';
-
+    
     var currHumidity = document.createElement('h2');
     currHumidity.textContent = 'Humidity: ' + humidity + ' %';
     
-
-
+    currentDay.appendChild(currCityBox);
+    currCityBox.append(currCity, currIcon, currTemp, currWind, currHumidity);
+    
+    
 }
 var getWeather = function (lat, lon) {
     
@@ -98,8 +89,3 @@ var gatherCoords = function(event) {
 
 button.addEventListener('click', gatherCoords);
 
-// to maybe get weather icon
-//----------- var icon = weather[0].icon      ------    someone had a.weather[0].icon?
-//=---------iconurl = 'http://openweathermap.org/img/wn/10d.png  ..?    10d is code
-//  ---------------so 'http://openweathermap.org/img/wn/ + icon + .png'
- //          createAttribute src as the link
