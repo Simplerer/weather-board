@@ -7,20 +7,12 @@
 
 
 ## Description
-Here is an accurate weather calander which gives real-time data and a 5-day forecast for any city you choose! The application will keep track of
+Here is an accurate weather calendar which gives real-time data and a 5-day forecast for any city you choose! The application will keep track of past searches and allow you to pull that data back up seamlessly!
 
 # A Glimpse
 
-![Movie & Drink Pairing](./assets/images/simmer%20down%20secretary.png)
+![In Action](./assets/images/weather-board.png)
 
 ## Check it Out
 
-[Simmer Down!](https://mariahmcdaniel.github.io/simmer-down-secretary/)
-
-## Collaborators
-
-- Mariah McDaniel
-
-- Scott Stone
-
-- Ryan Young
+[How is the Weather Out There?](https://simplerer.github.io/weather-board/)
