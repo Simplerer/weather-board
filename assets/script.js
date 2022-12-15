@@ -22,10 +22,10 @@ var weatherToday = function (city, date, icon, temp, wind, humidity) {
     //   temp
     var currTemp = document.createElement('h2');
     currTemp.textContent = 'Temp: ' + temp + '°F';
-    
+    //    wind
     var currWind = document.createElement('h2');
     currWind.textContent = 'Wind: ' + wind + ' MPH';
-    
+    //    humidity
     var currHumidity = document.createElement('h2');
     currHumidity.textContent = 'Humidity: ' + humidity + ' %';
     
@@ -70,6 +70,7 @@ var getForecast = function(lat, lon) {
 
             var futureDays = document.createElement('div');
             futureDays.className = 'col';
+            futureDays.setAttribute('style', 'border-style: solid')
 
             var futureDate = document.createElement('h2');
             futureDate.textContent = trueDate.toLocaleDateString("en-US");
@@ -106,8 +107,14 @@ var gatherCoords = function(event) {
 
     var cityButton = document.createElement('button');
     cityButton.textContent = cityName;
-    cityButton.className = 'btn btn-primary btn-lg btn-block'
-    pastCities.appendChild(cityButton);
+    cityButton.className = 'btn btn-primary btn-lg btn-block col-12 my-1'
+    if (pastCities.textContent.includes(cityName)) {
+    } else {
+        cityButton.setAttribute('id', cityName);
+        pastCities.appendChild(cityButton);
+    }
+
+    // for tomorrow----- use id tag(cityname) as event listener on button in pastcities field to reinit search!
 
     var getCoordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
 
@@ -118,7 +125,11 @@ var gatherCoords = function(event) {
       .then(function (data) {
           getWeather(data[0].lat, data[0].lon);
           getForecast(data[0].lat, data[0].lon);
-          localStorage.setItem(cityName, cityName);
+          var rePop = {
+            lat: data[0].lat,
+            lon: data[0].lon
+          };
+          localStorage.setItem(cityName, JSON.stringify(rePop));
         })
     .catch(function (error) {
         console.log(error);
@@ -126,4 +137,5 @@ var gatherCoords = function(event) {
 }
 
 button.addEventListener('click', gatherCoords);
+
 

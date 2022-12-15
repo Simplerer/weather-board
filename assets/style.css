@@ -1,10 +1,31 @@
-/* GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city */
+body {
+    background-color: cadetblue;
+}
 
+header {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 120%;
+    margin: 20px;
+    text-align: center;
+}
+
+#tops {
+    background-color: rgb(104, 182, 185);
+    border-style: groove;
+    border-color: rgb(21, 47, 48);
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 16px;
+    padding: 8px;
+}
+
+label {
+    font-size: 150%;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+#button {
+    font-size: 120%;
+}
