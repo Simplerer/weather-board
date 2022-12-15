@@ -118,7 +118,7 @@ var gatherCoords = function(event) {
         pastVisits.push(cityName);
     }
 
-    var getCoordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
+    var getCoordinates = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
 
     fetch(getCoordinates)
     .then(function (response) {
