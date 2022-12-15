@@ -3,6 +3,7 @@ var button = document.getElementById("button");
 var currentDay = document.getElementById("currentday");
 var pastCities = document.getElementById('past-cities');
 var forecast = document.getElementById('forecast');
+var pastVisits = [];
 
 
 var weatherToday = function (city, date, icon, temp, wind, humidity) {
@@ -112,9 +113,10 @@ var gatherCoords = function(event) {
     } else {
         cityButton.setAttribute('id', cityName);
         pastCities.appendChild(cityButton);
+        pastVisits.push(cityName);
     }
 
-    // for tomorrow----- use id tag(cityname) as event listener on button in pastcities field to reinit search!
+    console.log(pastVisits);
 
     var getCoordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
 
