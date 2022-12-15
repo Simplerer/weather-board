@@ -3,6 +3,7 @@ var button = document.getElementById("button");
 var currentDay = document.getElementById("currentday");
 var pastCities = document.getElementById('past-cities');
 var forecast = document.getElementById('forecast');
+var reSearch = document.querySelectorAll('.research');
 var pastVisits = [];
 
 
@@ -105,18 +106,17 @@ var gatherCoords = function(event) {
     event.preventDefault();
     
     var cityName = searchInput.value.trim();
-
-    var cityButton = document.createElement('button');
-    cityButton.textContent = cityName;
-    cityButton.className = 'btn btn-primary btn-lg btn-block col-12 my-1'
+    searchInput.value = '';
+    
     if (pastCities.textContent.includes(cityName)) {
     } else {
+        var cityButton = document.createElement('button');
+        cityButton.textContent = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+        cityButton.className = 'btn btn-primary btn-lg btn-block col-12 my-1'
         cityButton.setAttribute('id', cityName);
         pastCities.appendChild(cityButton);
         pastVisits.push(cityName);
     }
-
-    console.log(pastVisits);
 
     var getCoordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
 
@@ -136,8 +136,32 @@ var gatherCoords = function(event) {
     .catch(function (error) {
         console.log(error);
     })
+    
 }
 
 button.addEventListener('click', gatherCoords);
 
+// pastCities.addEventListener('click', function(e) {
+//     if (e.target.classList.contains('btn')) {;
+//     cityName = e.target.value.trim();
 
+//     var getCoordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
+
+//     fetch(getCoordinates)
+//     .then(function (response) {
+//         return response.json();
+//       })
+//       .then(function (data) {
+//           getWeather(data[0].lat, data[0].lon);
+//           getForecast(data[0].lat, data[0].lon);
+//           var rePop = {
+//             lat: data[0].lat,
+//             lon: data[0].lon
+//           };
+//           localStorage.setItem(cityName, JSON.stringify(rePop));
+//         })
+//     .catch(function (error) {
+//         console.log(error);
+//     })
+//     }
+// })
