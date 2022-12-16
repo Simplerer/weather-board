@@ -86,7 +86,7 @@ var getForecast = function(lat, lon) {
             var trueDate = new Date(data.list[i].dt * 1000);
 
             var futureDays = document.createElement('div');
-            futureDays.className = 'col';
+            futureDays.className = 'col-12 col-md';
             futureDays.setAttribute('style', 'border-style: solid')
 
             var futureDate = document.createElement('h2');
