@@ -7,6 +7,23 @@ var reSearch = document.querySelectorAll('.research');
 var pastVisits = [];
 
 
+var resetPage = function() {
+ var replayBtns = JSON.parse(localStorage.getItem('city'));
+ if (pastCities.textContent.includes(replayBtns)) {
+
+ }else {
+    for (var i = 0; i < replayBtns.length; i++) {
+    var cityButton = document.createElement('button');
+        cityButton.textContent = replayBtns[i].charAt(0).toUpperCase() + replayBtns[i].slice(1);
+        cityButton.className = 'btn btn-primary btn-lg btn-block col-12 my-1';
+        cityButton.setAttribute('id', replayBtns[i]);
+        pastCities.appendChild(cityButton);
+        pastVisits.push(replayBtns[i]);
+        localStorage.setItem('city', JSON.stringify(pastVisits));
+    }
+ }
+}
+
 var weatherToday = function (city, date, icon, temp, wind, humidity) {
 
     currentDay.textContent = "";
@@ -116,6 +133,7 @@ var gatherCoords = function(event) {
         cityButton.setAttribute('id', cityName);
         pastCities.appendChild(cityButton);
         pastVisits.push(cityName);
+        localStorage.setItem('city', JSON.stringify(pastVisits))
     }
 
     var getCoordinates = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
@@ -141,27 +159,4 @@ var gatherCoords = function(event) {
 
 button.addEventListener('click', gatherCoords);
 
-// pastCities.addEventListener('click', function(e) {
-//     if (e.target.classList.contains('btn')) {;
-//     cityName = e.target.value.trim();
-
-//     var getCoordinates = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=226011e8e963e4a2251a03649b5adc44'
-
-//     fetch(getCoordinates)
-//     .then(function (response) {
-//         return response.json();
-//       })
-//       .then(function (data) {
-//           getWeather(data[0].lat, data[0].lon);
-//           getForecast(data[0].lat, data[0].lon);
-//           var rePop = {
-//             lat: data[0].lat,
-//             lon: data[0].lon
-//           };
-//           localStorage.setItem(cityName, JSON.stringify(rePop));
-//         })
-//     .catch(function (error) {
-//         console.log(error);
-//     })
-//     }
-// })
+resetPage();
