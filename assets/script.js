@@ -1,5 +1,4 @@
 var searchInput = document.querySelector("#city");
-var button = document.getElementById("button");
 var currentDay = document.getElementById("currentday");
 var pastCities = document.getElementById('past-cities');
 var forecast = document.getElementById('forecast');
@@ -9,13 +8,12 @@ var pastVisits = [];
 
 var resetPage = function() {
  var replayBtns = JSON.parse(localStorage.getItem('city'));
- if (pastCities.textContent.includes(replayBtns)) {
-
- }else {
+ if (pastCities.textContent.includes(replayBtns) || replayBtns === null) {
+ }else  {
     for (var i = 0; i < replayBtns.length; i++) {
     var cityButton = document.createElement('button');
         cityButton.textContent = replayBtns[i].charAt(0).toUpperCase() + replayBtns[i].slice(1);
-        cityButton.className = 'btn btn-primary btn-lg btn-block col-12 my-1';
+        cityButton.className = 'btn btn-primary btn-lg btn-block col-12 my-1 blueBtn'
         cityButton.setAttribute('id', replayBtns[i]);
         pastCities.appendChild(cityButton);
         pastVisits.push(replayBtns[i]);
@@ -119,17 +117,17 @@ var getForecast = function(lat, lon) {
     })
 }
 
-var gatherCoords = function(event) {
-    event.preventDefault();
-    
+var gatherCoords = function() {
+        
     var cityName = searchInput.value.trim();
+    cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1)
     searchInput.value = '';
     
     if (pastCities.textContent.includes(cityName)) {
     } else {
         var cityButton = document.createElement('button');
-        cityButton.textContent = cityName.charAt(0).toUpperCase() + cityName.slice(1);
-        cityButton.className = 'btn btn-primary btn-lg btn-block col-12 my-1'
+        cityButton.textContent = cityName;
+        cityButton.className = 'btn btn-primary btn-lg btn-block col-12 my-1 blueBtn'
         cityButton.setAttribute('id', cityName);
         pastCities.appendChild(cityButton);
         pastVisits.push(cityName);
@@ -157,6 +155,19 @@ var gatherCoords = function(event) {
     
 }
 
-button.addEventListener('click', gatherCoords);
+document.addEventListener('click', function(event) {
+    if (event.target.matches('#button')) {
+        event.preventDefault();
+        gatherCoords();
+    } else if (event.target.matches('.blueBtn')){
+
+        var searchAgain = event.target.textContent
+        var blueBtn = JSON.parse(localStorage.getItem(searchAgain)); 
+        getWeather(blueBtn.lat, blueBtn.lon);
+        getForecast(blueBtn.lat, blueBtn.lon);
+    }
+});
+
 
 resetPage();
+
